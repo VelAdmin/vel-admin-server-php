@@ -1,5 +1,13 @@
 ## 技术架构
 PHP + ThinkPHP6 + LayUI + MySQL
 
-采用多应用模式
-[多应用](https://www.kancloud.cn/manual/thinkphp6_0/1297876)
+## 安装
+```zsh
+composer install
+```
+
+## 要求
+
+ThinkPHP的版本是`6.0.13`
+
+PHP >= `7.4`
