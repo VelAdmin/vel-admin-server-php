@@ -10,6 +10,11 @@ composer install
 ```zsh
 composer require topthink/think-view
 ```
+安装验证码模块
+[文档](https://www.kancloud.cn/manual/thinkphp6_0/1246402)
+```zsh
+composer require topthink/think-captcha
+```
 
 ## 要求
 
