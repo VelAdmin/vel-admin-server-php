@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TL-admin欢迎页面</title>
+    <style>
+        html,body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(133.32deg, rgba(238, 246, 250, 1) 0%, rgba(238, 246, 250, 1) 45.4%, rgba(232, 215, 252, 1) 67.62%, rgba(238, 246, 250, 1) 100%);
+        }
+        .content {
+            min-width: 400px;
+            border-radius: 36px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 8px solid rgba(255, 255, 255, 1);
+            box-shadow: 0px 72px 91px 4px rgba(198, 220, 245, 1);
+            display: flex;
+            padding: 100px 80px;
+            justify-content: center;
+            align-items: center;
+        }
+        .message {
+            display: flex;
+            flex-direction: column;
+            margin-right: 40px;
+        }
+        .title {
+            font-size: 60px;
+            font-weight: 900;
+            color: rgba(34, 51, 68, 1);
+        }
+        .text {
+            font-size: 48px;
+            font-weight: 900;
+            color: rgb(114, 119, 125);
+        }
+        .button {
+            margin-top: 40px;
+            width: 220px;
+            height: 64px;
+            opacity: 1;
+            border-radius: 286px;
+            background: rgba(49, 170, 98, 1);
+            font-size: 28px;
+            font-weight: 500;
+            color: rgba(252, 252, 254, 1);
+            text-align: center;
+            line-height: 64px;
+        }
+        .button:hover {
+            cursor: pointer;
+            opacity: 0.8;
+        }
+        .logo {
+            width: 282px;
+            height: 230px;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <div class="message">
+        <div class="title">TL-admin</div>
+        <div class="text">轻量后台管理系统</div>
+        <div class="button">进入后台</div>
+    </div>
+    <img class="logo" src="./static/assets/logo@3x.png" alt="">
+</div>
+</body>
+</html>

@@ -6,6 +6,11 @@ PHP + ThinkPHP6 + LayUI + MySQL
 composer install
 ```
 
+安装Think模版
+```zsh
+composer require topthink/think-view
+```
+
 ## 要求
 
 ThinkPHP的版本是`6.0.13`
