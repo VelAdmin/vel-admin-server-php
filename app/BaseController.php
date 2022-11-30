@@ -5,9 +5,10 @@ namespace app;
 
 use app\service\Auth;
 use think\App;
+use think\exception\HttpResponseException;
 use think\exception\ValidateException;
 use think\Validate;
-use \liliuwei\think\Jump;
+use think\facade\View;
 
 /**
  * 控制器基础类
@@ -39,6 +40,12 @@ abstract class BaseController
     protected $middleware = [];
 
     /**
+     * 白名单
+     * @var string[]
+     */
+    protected $whiteList = ['login', 'index'];
+
+    /**
      * 构造方法
      * @access public
      * @param  App  $app  应用对象
@@ -60,11 +67,12 @@ abstract class BaseController
 
     protected function checkRole()
     {
-        if(empty(session('admin_user_name'))){
-            return redirect('login/index');
+        $controller = lcfirst(request()->controller());
+
+        if(!in_array($controller, $this->whiteList) && empty(session('admin_user_name'))){
+            return $this->redirectTo((string)url('login/index'));
         }
 
-        $controller = lcfirst(request()->controller());
         $action = request()->action();
         $checkInput = $controller . '/' . $action;
 
@@ -78,16 +86,24 @@ abstract class BaseController
             if (!$flag) {
                 if (request()->isAjax()) {
                     return json(reMsg(-403, '', '无操作权限'));
-                } else {
-                    $this->error('无操作权限');
                 }
             }
         }
 
-        $this->assign([
+        View::assign([
             'admin_name' => session('admin_user_name'),
             'admin_id' => session('admin_user_id')
         ]);
+    }
+
+    /**
+     * 自定义重定向方法
+     * @param $args
+     */
+    public function redirectTo(...$args)
+    {
+        // 此处 throw new HttpResponseException 抛出异常重定向
+        throw new HttpResponseException(redirect(...$args));
     }
 
     /**

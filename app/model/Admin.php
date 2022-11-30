@@ -33,4 +33,22 @@ class Admin extends Model
         } catch (\Exception $e) {}
     }
 
+    /**
+     * 获取管理员信息
+     * @param $id
+     * @return array
+     */
+    public function getAdminInfo($id)
+    {
+        try {
+
+            $info = $this->where('admin_id', $id)->findOrEmpty()->toArray();
+        } catch (\Exception $e) {
+
+            return modelReMsg(-1, '', $e->getMessage());
+        }
+
+        return modelReMsg(0, $info, 'ok');
+    }
+
 }
