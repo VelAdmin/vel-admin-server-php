@@ -1,9 +1,9 @@
 {
-    "name": "topthink/think",
-    "description": "the new thinkphp framework",
+    "name": "tl/admin",
+    "description": "a very nice admin system",
     "type": "project",
     "keywords": [
-        "framework",
+        "admin",
         "thinkphp",
         "ORM"
     ],
@@ -11,13 +11,9 @@
     "license": "Apache-2.0",
     "authors": [
         {
-            "name": "liu21st",
-            "email": "liu21st@gmail.com"
-        },
-        {
-            "name": "yunwuxin",
-            "email": "448901948@qq.com"
-        }        
+            "name": "guizimo",
+            "email": "17680262548@163.com"
+        }
     ],
     "require": {
         "php": ">=7.2.5",

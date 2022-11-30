@@ -10,16 +10,24 @@ use think\facade\View;
 class Login extends BaseController
 {
 
+    /**
+     * 登录页面
+     * @return string
+     */
     public function index()
     {
         return View::fetch('index');
     }
 
+    /**
+     * 登录接口
+     * @return \think\response\Json|void
+     */
     public function doLogin()
     {
-        if(request()->isPost()) {
+        if (request()->isPost()) {
             $param = input('post.');
-            if(!captcha_check($param['code'])){
+            if (!captcha_check($param['code'])) {
                 return reMsg(-1, '', '验证码错误');
             }
 
@@ -27,12 +35,12 @@ class Login extends BaseController
             $admin = new Admin();
             $adminInfo = $admin->getAdminByName($param['username']);
 
-            if(0 != $adminInfo['code'] || empty($adminInfo['data'])){
+            if (0 != $adminInfo['code'] || empty($adminInfo['data'])) {
                 $log->writeLoginLog($param['username'], 2);
                 return reMsg(-2, '', '用户名密码错误');
             }
 
-            if(!checkPassword($param['password'], $adminInfo['data']['admin_password'])){
+            if (!checkPassword($param['password'], $adminInfo['data']['admin_password'])) {
                 $log->writeLoginLog($param['username'], 2);
                 return reMsg(-3, '', '用户名密码错误');
             }
@@ -52,8 +60,14 @@ class Login extends BaseController
 
     }
 
+    /**
+     * 退出登录
+     * @return \think\response\Json
+     */
     public function loginOut()
     {
+        session('admin_user_name', null);
+        session('admin_user_id', null);
+        return reMsg(0, url('login/index'), '登录成功');
     }
-
 }

@@ -55,7 +55,7 @@
                         <a href="javascript:;" onclick="editPwd();" data-title="修改密码" data-icon="fa fa-gears">修改密码</a>
                     </dd>
                     <dd>
-                        <a href="{:url('login/loginOut')}" class="login-out">退出登录</a>
+                        <a href="javascript:;" onclick="loginOut();" class="login-out">退出登录</a>
                     </dd>
                 </dl>
             </li>
@@ -142,6 +142,22 @@
             area: ['40%', '50%'],
             content: '{:url("index/editPwd")}'
         });
+    }
+
+    function loginOut() {
+        let $ = layui.$
+        $.get('{:url("login/loginOut")}', function (res) {
+            if(res.code === 0) {
+                // 登入成功的提示与跳转
+                layer.msg('退出成功', {
+                    offset: '15px'
+                    ,icon: 1
+                    ,time: 1000
+                }, function(){
+                    location.href = '/login'; //后台主页
+                });
+            }
+        })
     }
 </script>
 </body>

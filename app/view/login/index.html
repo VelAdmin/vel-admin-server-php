@@ -142,7 +142,6 @@
         // form.render();
 
         form.on('submit(loginSubmit)', function (data) {
-            console.log(JSON.stringify(data.field))
             $.post('{:url("login/doLogin")}', data.field, function (res) {
                 if(res.code === 0) {
                     // 登入成功的提示与跳转
