@@ -1,5 +1,6 @@
 <?php
 // 应用公共文件
+use app\service\Auth;
 use think\response\Json;
 
 
@@ -98,4 +99,15 @@ function makeTree($data) {
     unset($res);
 
     return $tree;
+}
+
+/**
+ * 按钮检测
+ * @param $input
+ * @return bool
+ */
+function buttonAuth($input)
+{
+    $authModel = Auth::instance();
+    return  $authModel->authCheck($input, session('admin_role_id'));
 }

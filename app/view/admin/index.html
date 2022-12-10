@@ -49,7 +49,7 @@
                 <a href="javascript:;" data-clear="清理" class="layuimini-clear"><i class="fa fa-trash-o"></i></a>
             </li>
             <li class="layui-nav-item layuimini-setting">
-                <a href="javascript:;">admin</a>
+                <a href="javascript:;">{$username}</a>
                 <dl class="layui-nav-child">
                     <dd>
                         <a href="javascript:;" onclick="editPwd();" data-title="修改密码" data-icon="fa fa-gears">修改密码</a>
@@ -82,7 +82,7 @@
                     <dl class="layui-nav-child">
                         {foreach name="$vo['children']" item="v"}
                         <dd>
-                            <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-1" data-tab="/admin/{$v['node_path']}" target="_self">
+                            <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-1" data-tab="/{$v['node_path']}" target="_self">
                                 <span class="layui-left-nav"> {$v['title']}</span>
                             </a>
                         </dd>

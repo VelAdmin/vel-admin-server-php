@@ -20,7 +20,7 @@ class Role extends Model
 
             $res = $this->where($where)->order('role_id', 'desc')->paginate($limit);
 
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
 
             return modelReMsg(-1, '', $e->getMessage());
         }
@@ -38,14 +38,14 @@ class Role extends Model
         try {
 
             $has = $this->where('role_name', $param['role_name'])->find();
-            if(!empty($has)) {
+            if (!empty($has)) {
                 return modelReMsg(-2, '', '角色名称已经存在');
             }
 
             $param['role_node'] = '1,2,3'; // 默认权限
 
             $this->insert($param);
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
 
             return modelReMsg(-1, '', $e->getMessage());
         }
@@ -63,7 +63,7 @@ class Role extends Model
         try {
 
             $info = $this->where('role_id', $id)->findOrEmpty()->toArray();
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
 
             return modelReMsg(-1, '', $e->getMessage());
         }
@@ -79,19 +79,18 @@ class Role extends Model
     public function editRole($param)
     {
         try {
-
             $has = $this->where('role_name', $param['role_name'])->where('role_id', '<>', $param['role_id'])
                 ->findOrEmpty()->toArray();
-            if(!empty($has)) {
+            if (!empty($has)) {
                 return modelReMsg(-2, '', '角色名已经存在');
             }
-
-            $this->save($param, ['role_id' => $param['role_id']]);
-        }catch (\Exception $e) {
-
+            $curRole = (new Role())->where('role_id', $param['role_id'])->find();
+            $curRole->role_name = $param['role_name'];
+            $curRole->role_status = $param['role_status'];
+            $curRole->save();
+        } catch (\Exception $e) {
             return modelReMsg(-1, '', $e->getMessage());
         }
-
         return modelReMsg(0, '', '编辑角色成功');
     }
 
@@ -106,7 +105,6 @@ class Role extends Model
             if (1 == $id) {
                 return modelReMsg(-2, '', '超级管理员不可删除');
             }
-
             // 检测角色下是否有管理员
             $adminModel = new Admin();
             $has = $adminModel->getAdminInfoByRoleId($id);
@@ -114,13 +112,10 @@ class Role extends Model
             if (!empty($has['data'])) {
                 return modelReMsg(-2, '', '该角色下有管理员，不可删除');
             }
-
             $this->where('role_id', $id)->delete();
         } catch (\Exception $e) {
-
             return modelReMsg(-1, '', $e->getMessage());
         }
-
         return modelReMsg(0, '', '删除成功');
     }
 
@@ -179,7 +174,7 @@ class Role extends Model
                     $map = $this->cacheRoleNodeMap($res['role_node'], $roleId);
                 }
 
-            }catch (\Exception $e) {
+            } catch (\Exception $e) {
 
                 return modelReMsg(-1, $map, $e->getMessage());
             }

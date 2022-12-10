@@ -16,7 +16,8 @@ class Admin extends BaseController
         $menu = $authModel->getAuthMenu(session('admin_role_id'));
 
         View::assign([
-            'menu' => $menu
+            'menu' => $menu,
+            'username' => session('admin_user_name')
         ]);
         return View::fetch('index');
     }

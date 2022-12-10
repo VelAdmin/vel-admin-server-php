@@ -2,6 +2,7 @@
     "name": "tl/admin",
     "description": "a very nice admin system",
     "type": "project",
+    "version": "1.0.0",
     "keywords": [
         "admin",
         "thinkphp",
